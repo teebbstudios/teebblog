@@ -54,6 +54,11 @@ class Post
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $postImage;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -162,6 +167,18 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPostImage(): ?string
+    {
+        return $this->postImage;
+    }
+
+    public function setPostImage(?string $postImage): self
+    {
+        $this->postImage = $postImage;
 
         return $this;
     }
