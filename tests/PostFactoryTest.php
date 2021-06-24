@@ -10,9 +10,10 @@ class PostFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $factory = new PostFactory();
+//        $factory = new PostFactory();
+        $factory = $this->createMock(PostFactory::class);
         $post = $factory->create("这是一个标题", "这是正文", "这是摘要");
-
+dd($post);
         $this->assertInstanceOf(Post::class, $post);
         $this->assertSame('draft', $post->getStatus());
 
