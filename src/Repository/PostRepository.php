@@ -45,6 +45,14 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByTitleDQL(string $keywords)
+    {
+        return $this->_em->createQuery('SELECT p FROM App\Entity\Post p WHERE p.title LIKE :keywords ORDER BY p.id DESC')
+            ->setParameter('keywords', '%'.$keywords.'%')
+            ->setMaxResults(10)
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Post
     {

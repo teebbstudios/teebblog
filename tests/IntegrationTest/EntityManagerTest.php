@@ -104,6 +104,10 @@ class EntityManagerTest extends KernelTestCase
         $findByTitlePosts = $postRepo->findByTitle('02');
         $this->assertCount(1, $findByTitlePosts);
         $this->assertSame('Post title 02', $findByTitlePosts[0]->getTitle());
+
+        $findByTitlePostsDQL = $postRepo->findByTitleDQL('03');
+        $this->assertCount(1, $findByTitlePostsDQL);
+        $this->assertSame('Post title 03', $findByTitlePostsDQL[0]->getTitle());
     }
 
     private function truncateEntities(array $entities)
