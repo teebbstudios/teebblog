@@ -34,7 +34,7 @@ class EntityManagerTest extends KernelTestCase
         $this->assertInstanceOf(PostFactory::class, $factory);
 
         $post1 = $factory->create('Post title 01', 'Post Body 01');
-        $post2 = $factory->create('Post title 02', 'Post Body 02');
+        $post2 = $factory->create('Post title 02', 'Post Body 02', null, 'published');
         $post3 = $factory->create('Post title 03', 'Post Body 03');
         $post4 = $factory->create('Post title 04', 'Post Body 04');
         $this->entitymanager->persist($post1);
@@ -50,6 +50,16 @@ class EntityManagerTest extends KernelTestCase
 
         $posts = $postRepo->findAll();
         $this->assertCount(4, $posts);
+
+        $findOneByPost = $postRepo->findOneBy(['title' => 'Post title 01']);
+        $this->assertSame($post1, $findOneByPost);
+
+        $findPost = $postRepo->find($findOneByPost->getId());
+        $this->assertSame($findOneByPost, $findPost);
+
+        $findByPosts = $postRepo->findBy(['status' => 'draft']);
+        $this->assertCount(3, $findByPosts);
+
     }
 
 //    public function testEntityManagerQuery():void
