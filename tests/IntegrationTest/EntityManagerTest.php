@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class EntityManagerTest extends KernelTestCase
 {
     private $entitymanager;
+
     protected function setUp(): void
     {
         self::bootKernel();
@@ -73,6 +74,37 @@ class EntityManagerTest extends KernelTestCase
 //        $posts = $postRepo->findAll();
 //        $this->assertCount(4, $posts);
 //    }
+
+    public function testQueryBuilder(): void
+    {
+        $factory = static::getContainer()->get(PostFactory::class);
+
+        $post1 = $factory->create('Post title 01', 'Post Body 01');
+        $post2 = $factory->create('Post title 02', 'Post Body 02', null, 'published');
+        $post3 = $factory->create('Post title 03', 'Post Body 03');
+        $post4 = $factory->create('Post title 04', 'Post Body 04');
+        $this->entitymanager->persist($post1);
+        $this->entitymanager->persist($post2);
+        $this->entitymanager->persist($post3);
+        $this->entitymanager->persist($post4);
+
+        $this->entitymanager->flush();
+
+        $qb = $this->entitymanager->createQueryBuilder();
+        $posts = $qb->select('p')->from(Post::class, 'p')
+            ->getQuery()->getResult();
+
+        $this->assertCount(4, $posts);
+
+        $postRepo = static::getContainer()->get(PostRepository::class);
+
+        $posts = $postRepo->findByStatus('published');
+        $this->assertCount(1, $posts);
+
+        $findByTitlePosts = $postRepo->findByTitle('02');
+        $this->assertCount(1, $findByTitlePosts);
+        $this->assertSame('Post title 02', $findByTitlePosts[0]->getTitle());
+    }
 
     private function truncateEntities(array $entities)
     {
