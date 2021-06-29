@@ -20,3 +20,5 @@
 ###< phpunit/phpunit ###
 
 .idea
+
+public/uploads/images
