@@ -20,7 +20,10 @@
         "symfony/mime": "5.3.*",
         "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/runtime": "5.3.*",
-        "symfony/yaml": "5.3.*"
+        "symfony/twig-bundle": "5.3.*",
+        "symfony/yaml": "5.3.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -32,7 +35,6 @@
         "symfony/monolog-bundle": "^3.0",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "^5.3",
-        "symfony/twig-bundle": "^5.3",
         "symfony/var-dumper": "^5.3",
         "symfony/web-profiler-bundle": "^5.3"
     },
