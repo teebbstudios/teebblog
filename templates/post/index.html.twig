@@ -26,11 +26,15 @@
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.summary }}</td>
-                <td>{{ post.body }}</td>
+                <td>{{ post.body|raw }}</td>
                 <td>{{ post.status }}</td>
                 <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.postImage }}</td>
+                <td>
+                    {% if post.postImage is not null %}
+                    <img src={{ asset(post.postImage, 'file_upload') }}>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('post_show', {'id': post.id}) }}">show</a>
                 </td>

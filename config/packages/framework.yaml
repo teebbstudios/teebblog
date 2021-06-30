@@ -17,6 +17,13 @@ framework:
     php_errors:
         log: true
 
+    assets:
+        packages:
+
+            # Prototype
+            file_upload:
+                base_path: '%base_path%'
+
 when@test:
     framework:
         test: true

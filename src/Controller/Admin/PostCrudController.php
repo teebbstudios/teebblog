@@ -29,8 +29,8 @@ class PostCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title'),
             ImageField::new('postImage')
-                ->setBasePath('uploads/images')
-                ->setUploadDir('public/uploads/images')
+                ->setBasePath($this->getParameter('base_path'))
+                ->setUploadDir($this->getParameter('upload_dir'))
                 ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]'),
             TextareaField::new('summary'),
             TextEditorField::new('body'),
