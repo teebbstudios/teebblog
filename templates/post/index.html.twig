@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Teeblog{% endblock %}
 
 {% block body %}
-    <h1>Post index</h1>
+    <h1>Teebblog List</h1>
 
     <table class="table">
         <thead>
@@ -22,6 +22,7 @@
         <tbody>
         {% for post in posts %}
             <tr>
+{#                {{ dump(post) }}#}
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.summary }}</td>
@@ -32,7 +33,6 @@
                 <td>{{ post.postImage }}</td>
                 <td>
                     <a href="{{ path('post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -43,5 +43,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('post_new') }}">Create new</a>
 {% endblock %}
