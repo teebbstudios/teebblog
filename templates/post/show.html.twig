@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Body</th>
-                <td>{{ post.body }}</td>
+                <td>{{ post.body|raw }}</td>
             </tr>
             <tr>
                 <th>Status</th>
@@ -37,14 +37,15 @@
             </tr>
             <tr>
                 <th>PostImage</th>
-                <td>{{ post.postImage }}</td>
+                <td>
+                    {% if post.postImage is not null %}
+                        <img src={{ asset(post.postImage, 'file_upload') }}>
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('post_index') }}">back to list</a>
 
-    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-
-    {{ include('post/_delete_form.html.twig') }}
 {% endblock %}

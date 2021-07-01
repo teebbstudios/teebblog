@@ -17,6 +17,8 @@ framework:
     php_errors:
         log: true
 
+    ide: phpstorm
+
     assets:
         packages:
 

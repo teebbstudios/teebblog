@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,9 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/{id}', name: 'post_show', methods: ['GET'])]
-    public function show(Post $post): Response
+    #[Route('/post/{id1}', name: 'post_show', methods: ['GET'])]
+    #[ParamConverter('post', options: ['id' => 'id1'])]
+    public function show(Request $request, Post $post): Response
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
