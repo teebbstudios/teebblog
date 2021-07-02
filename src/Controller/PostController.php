@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
+use App\Form\CommentType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +25,28 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/{id1}', name: 'post_show', methods: ['GET'])]
+    #[Route('/post/{id1}', name: 'post_show', methods: ['GET', 'POST'])]
     #[ParamConverter('post', options: ['id' => 'id1'])]
-    public function show(Request $request, Post $post): Response
+    public function show(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
+        $commentForm = $this->createForm(CommentType::class);
+
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid())
+        {
+            if ($commentForm->get('submit')->isClicked()){
+                /**@var Comment $data**/
+                $data = $commentForm->getData();
+                $data->setPost($post);
+                $entityManager->persist($data);
+                $entityManager->flush();
+            }
+        }
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'comment_form' => $commentForm->createView()
         ]);
     }
 

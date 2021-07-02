@@ -48,4 +48,23 @@
 
     <a href="{{ path('post_index') }}">back to list</a>
 
+{#    {{ form(comment_form) }}#}
+    {{ form_start(comment_form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(comment_form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(comment_form.author) }}
+        </div>
+        <div class="col">
+            {{ form_row(comment_form.email) }}
+        </div>
+        <div class="col">
+            {{ form_row(comment_form.message) }}
+        </div>
+    </div>
+    <button type="submit">提交</button>
+    {{ form_end(comment_form) }}
 {% endblock %}
