@@ -2,49 +2,37 @@
 
 {% block title %}Teebblog{% endblock %}
 
-{% block body %}
-    <h1>Teebblog List</h1>
+{% block content %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Summary</th>
-                <th>Body</th>
-                <th>Status</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>PostImage</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-{#                {{ dump(post) }}#}
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.summary }}</td>
-                <td>{{ post.body|raw }}</td>
-                <td>{{ post.status }}</td>
-                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    {% if post.postImage is not null %}
-                    <img src={{ asset(post.postImage, 'file_upload') }}>
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('post_show', {'id1': post.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h1 class="my-4">Teebblog List</h1>
 
+    <!-- Blog Post -->
+    {% for post in posts %}
+    <div class="card mb-4">
+        {% if post.postImage is not null %}
+            <img class="card-img-top" src={{ asset(post.postImage, 'file_upload') }}  alt="{{ post.title }}">
+        {% endif %}
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.summary }}</p>
+            <a href="{{ path('post_show', {'id1': post.id}) }}" class="btn btn-primary">Read More &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+            <a href="#">Start Bootstrap</a>
+        </div>
+    </div>
+    {% else %}
+        <h1>暂时没有任何文章。</h1>
+    {% endfor %}
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+        </li>
+    </ul>
 {% endblock %}
