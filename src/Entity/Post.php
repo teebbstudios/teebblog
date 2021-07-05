@@ -51,6 +51,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $comments;
 

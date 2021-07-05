@@ -4,3 +4,10 @@ body {
     padding-top: 56px;
     //background-color: lightgray;
 }
+
+form {
+    label.required:after{
+        content: '*';
+        color: red;
+    }
+}
