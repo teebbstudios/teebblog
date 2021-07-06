@@ -60,6 +60,11 @@ class Comment
      */
     private $children;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $level = 1;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -180,6 +185,18 @@ class Comment
                 $child->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }

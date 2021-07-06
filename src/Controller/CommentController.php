@@ -21,6 +21,12 @@ class CommentController extends AbstractController
     ]
     public function replyComment(Request $request, Post $post, Comment $parentComment, EntityManagerInterface $em): Response
     {
+        $maxLevel = $this->getParameter('max_comment_level');
+
+        if ($parentComment->getLevel()==$maxLevel){
+            return new Response('<p class="max-level-info">当前评论已达到最大层级，不允许添加子评论。😄️</p>');
+        }
+
         $replyComment = $this->createForm(CommentType::class, null, [
             'action' => $request->getUri()
         ]);
@@ -31,6 +37,7 @@ class CommentController extends AbstractController
             /**@var Comment $data**/
             $data = $replyComment->getData();
             $data->setParent($parentComment);
+            $data->setLevel($parentComment->getLevel() + 1);
 //            $data->setPost($post);
             $em->persist($data);
             $em->flush();

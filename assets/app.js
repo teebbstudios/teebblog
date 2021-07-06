@@ -24,6 +24,9 @@ $(document).ready(function(){
     $('button.js-reply-comment-btn').on('click', function (element) {
         let postId = $(this).data('post-id');
         let parentId = $(this).data('parent-id');
+        if ($(this).nextAll('p.max-level-info').length === 1){
+            return;
+        }
         if($(this).nextAll('div.reply-comment-card').length === 0){
             $.ajax({
                 url: Routing.generate('reply_comment', {post_id: postId, comment_id: parentId}),
