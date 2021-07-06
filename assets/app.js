@@ -11,6 +11,22 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+import $ from 'jquery';
+
 import 'bootstrap';
 
-import $ from 'jquery';
+$(document).ready(function(){
+    $('button.js-reply-comment-btn').on('click', function () {
+        let postId = $(this).data('post-id');
+        let parentId = $(this).data('parent-id');
+
+        $.ajax({
+            url: '',
+            type: 'POST'
+        }).done(function (response){
+
+        }).fail(function (jqXHR){
+
+        })
+    })
+})
