@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     #[
-        Route('/post/{post_id}/comment/{comment_id}/reply', name: 'comment'),
+        Route('/post/{post_id}/comment/{comment_id}/reply',options: ['expose' => true], name: 'reply_comment'),
         ParamConverter('post', options: ['id' => 'post_id']),
         ParamConverter('parentComment', options: ['id' => 'comment_id']),
     ]

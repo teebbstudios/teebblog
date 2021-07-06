@@ -15,16 +15,21 @@ import $ from 'jquery';
 
 import 'bootstrap';
 
+const routes = require('../public/js/fos_js_routes.json');
+import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData(routes);
+
 $(document).ready(function(){
-    $('button.js-reply-comment-btn').on('click', function () {
+    $('button.js-reply-comment-btn').on('click', function (element) {
         let postId = $(this).data('post-id');
         let parentId = $(this).data('parent-id');
 
         $.ajax({
-            url: '',
+            url: Routing.generate('reply_comment', {post_id: postId, comment_id: parentId}),
             type: 'POST'
         }).done(function (response){
-
+            $(element.target).after(response)
         }).fail(function (jqXHR){
 
         })

@@ -1,0 +1,1 @@
+{"base_url":"","routes":{"reply_comment":{"tokens":[["text","\/reply"],["variable","\/","[^\/]++","comment_id",true],["text","\/comment"],["variable","\/","[^\/]++","post_id",true],["text","\/post"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":[],"schemes":[]}},"prefix":"","host":"localhost","port":"","scheme":"http","locale":[]}
