@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% import 'marco.html.twig' as macros %}
 {% block title %}Post{% endblock %}
 
 {% block content %}
@@ -51,14 +51,7 @@
 
     <!-- Single Comment -->
     {% for comment in post.comments %}
-    <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-            <h5 class="mt-0">{{ comment.author }}</h5>
-            {{ comment.message }}
-            <button class="btn btn-sm btn-link js-reply-comment-btn" data-post-id="{{ post.id }}" data-parent-id="{{ comment.id }}">回复</button>
-        </div>
-    </div>
+        {{ macros.show_comments(comment, post) }}
     {% endfor %}
 
     <!-- Comment with nested comments -->
