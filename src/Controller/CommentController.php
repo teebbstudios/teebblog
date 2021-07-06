@@ -31,7 +31,7 @@ class CommentController extends AbstractController
             /**@var Comment $data**/
             $data = $replyComment->getData();
             $data->setParent($parentComment);
-            $data->setPost($post);
+//            $data->setPost($post);
             $em->persist($data);
             $em->flush();
 

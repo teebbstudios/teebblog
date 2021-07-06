@@ -24,14 +24,15 @@ $(document).ready(function(){
     $('button.js-reply-comment-btn').on('click', function (element) {
         let postId = $(this).data('post-id');
         let parentId = $(this).data('parent-id');
+        if($(this).nextAll('div.reply-comment-card').length === 0){
+            $.ajax({
+                url: Routing.generate('reply_comment', {post_id: postId, comment_id: parentId}),
+                type: 'POST'
+            }).done(function (response){
+                $(element.target).after(response)
+            }).fail(function (jqXHR){
 
-        $.ajax({
-            url: Routing.generate('reply_comment', {post_id: postId, comment_id: parentId}),
-            type: 'POST'
-        }).done(function (response){
-            $(element.target).after(response)
-        }).fail(function (jqXHR){
-
-        })
+            })
+        }
     })
 })

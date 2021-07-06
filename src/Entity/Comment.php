@@ -46,7 +46,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, nullable=true)
      */
     private $post;
 
@@ -56,7 +56,7 @@ class Comment
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", cascade={"remove"})
      */
     private $children;
 
