@@ -7,7 +7,7 @@
     <h1 class="my-4">Teebblog List</h1>
 
     <!-- Blog Post -->
-    {% for post in posts %}
+    {% for post in paginator %}
     <div class="card mb-4">
         {% if post.postImage is not null %}
             <img class="card-img-top" src={{ asset(post.postImage, 'file_upload') }}  alt="{{ post.title }}">
@@ -28,11 +28,15 @@
 
     <!-- Pagination -->
     <ul class="pagination justify-content-center mb-4">
+        {% if page - 1 > 0 %}
         <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
+            <a class="page-link" href="{{ path('post_index', {'page': page -1}) }}">&larr; Older</a>
         </li>
-        <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
+        {% endif %}
+        {% if page + 1 <= max_page %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path('post_index', {'page': page + 1}) }}">Newer &rarr;</a>
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

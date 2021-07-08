@@ -7,6 +7,7 @@ parameters:
     base_path: 'uploads/images'
     upload_dir: 'public/%base_path%'
     max_comment_level: 5
+    page_limit: 5
 services:
     # default configuration for services in *this* file
     _defaults:

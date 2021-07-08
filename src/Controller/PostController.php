@@ -18,10 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     #[Route('/', name: 'post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    public function index(Request $request, PostRepository $postRepository): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $limit = $this->getParameter('page_limit');
+        $offset = ($page - 1) * $limit;
+        $paginator = $postRepository->getPostPaginator($offset, $limit);
+        $max_page = ceil($paginator->count() / $limit);
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findBy(['status' => 'published'], ['id' => 'DESC']),
+            'max_page' => $max_page,
+            'paginator' => $paginator,
+            'page' => $page
+//            'posts' => $postRepository->findBy(['status' => 'published'], ['id' => 'DESC']),
         ]);
     }
 
@@ -33,10 +41,9 @@ class PostController extends AbstractController
 
         $commentForm->handleRequest($request);
 
-        if ($commentForm->isSubmitted() && $commentForm->isValid())
-        {
-            if ($commentForm->get('submit')->isClicked()){
-                /**@var Comment $data**/
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            if ($commentForm->get('submit')->isClicked()) {
+                /**@var Comment $data * */
                 $data = $commentForm->getData();
                 $data->setPost($post);
                 $entityManager->persist($data);

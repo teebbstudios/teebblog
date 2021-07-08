@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -48,9 +49,22 @@ class PostRepository extends ServiceEntityRepository
     public function findByTitleDQL(string $keywords)
     {
         return $this->_em->createQuery('SELECT p FROM App\Entity\Post p WHERE p.title LIKE :keywords ORDER BY p.id DESC')
-            ->setParameter('keywords', '%'.$keywords.'%')
+            ->setParameter('keywords', '%' . $keywords . '%')
             ->setMaxResults(10)
             ->getResult();
+    }
+
+    public function getPostPaginator(int $offset,  int $limit = 10, string $status='published'): Paginator
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', $status)
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
     }
 
     /*
