@@ -65,9 +65,19 @@ class Comment
      */
     private $level = 1;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=FileManaged::class)
+     * @ORM\JoinTable(name="comments_files",
+     *      joinColumns={@ORM\JoinColumn(name="comment_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $files;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->files = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +207,30 @@ class Comment
     public function setLevel(int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FileManaged[]
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(FileManaged $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+        }
+
+        return $this;
+    }
+
+    public function removeFile(FileManaged $file): self
+    {
+        $this->files->removeElement($file);
 
         return $this;
     }
