@@ -6,8 +6,10 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\PostType;
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +37,8 @@ class PostController extends AbstractController
 
     #[Route('/post/{id1}', name: 'post_show', methods: ['GET', 'POST'])]
     #[ParamConverter('post', options: ['id' => 'id1'])]
-    public function show(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+    public function show(Request $request, Post $post, EntityManagerInterface $entityManager,
+                         PaginatorInterface $paginator, CommentRepository $commentRepository): Response
     {
         $commentForm = $this->createForm(CommentType::class);
 
@@ -51,8 +54,16 @@ class PostController extends AbstractController
             }
         }
 
+        $query = $commentRepository->getPaginationQuery($post);
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'pagination' => $pagination,
             'comment_form' => $commentForm->createView()
         ]);
     }
