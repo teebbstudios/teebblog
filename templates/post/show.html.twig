@@ -3,7 +3,14 @@
 {% block title %}Post{% endblock %}
 
 {% block content %}
-
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-{{ label }} mt-4 alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <!-- Title -->
     <h1 class="mt-4">{{ post.title }}</h1>
 

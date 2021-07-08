@@ -52,6 +52,8 @@ class PostController extends AbstractController
                 $entityManager->persist($data);
                 $entityManager->flush();
             }
+
+            $this->addFlash('success', '您的评论已成功提交！');
         }
 
         $query = $commentRepository->getPaginationQuery($post);
