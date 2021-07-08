@@ -8,6 +8,7 @@ parameters:
     upload_dir: 'public/%base_path%'
     max_comment_level: 5
     page_limit: 5
+    locale: 'zh_CN'
 services:
     # default configuration for services in *this* file
     _defaults:
