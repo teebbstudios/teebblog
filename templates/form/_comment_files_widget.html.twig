@@ -1,0 +1,8 @@
+{% block _comment_files_widget %}
+    {% if prototype is defined and not prototype.rendered %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+    {% endif %}
+    {{- block('form_widget') -}}
+
+    <button type="button" class="btn btn-sm btn-outline-secondary js-add-file-row-btn">添加文件</button>
+{% endblock %}

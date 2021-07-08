@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,6 +42,10 @@ class CommentType extends AbstractType
                 ]
             ])
             ->add('message')
+            ->add('files', CollectionType::class, [
+                'entry_type' => FileType::class,
+                'allow_add' => true,
+            ])
 //            ->add('createdAt')
 //            ->add('updatedAt')
 //            ->add('post')
