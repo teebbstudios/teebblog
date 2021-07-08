@@ -44,7 +44,16 @@ class CommentType extends AbstractType
             ->add('message')
             ->add('files', CollectionType::class, [
                 'entry_type' => FileType::class,
+                'entry_options' => [
+                    'label' => false,
+                    'attr' => [
+                        'onchange' => 'fixFileInputName(this)'
+                    ]
+                ],
                 'allow_add' => true,
+                'attr' => [
+                    'class' => 'input-row-wrapper'
+                ]
             ])
 //            ->add('createdAt')
 //            ->add('updatedAt')
