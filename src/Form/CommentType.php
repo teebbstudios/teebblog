@@ -53,7 +53,8 @@ class CommentType extends AbstractType
                 'allow_add' => true,
                 'attr' => [
                     'class' => 'input-row-wrapper'
-                ]
+                ],
+                'mapped' => false
             ])
 //            ->add('createdAt')
 //            ->add('updatedAt')

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\FileManaged;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\PostType;
@@ -12,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,6 +50,29 @@ class PostController extends AbstractController
             if ($commentForm->get('submit')->isClicked()) {
                 /**@var Comment $data * */
                 $data = $commentForm->getData();
+
+                $files = $request->files->all();
+                /**@var UploadedFile $file**/
+                foreach ($files['comment']['files'] as $file){
+                    $originName = $file->getClientOriginalName();
+                    $fileName = pathinfo(htmlspecialchars($originName), PATHINFO_FILENAME) . '-' . $file->getFilename() . '.' . $file->getClientOriginalExtension();
+                    $uploadPath = $this->getParameter('base_path');
+                    $mimeType = $file->getMimeType();
+                    $filesize = $file->getSize();
+
+                    $file->move($uploadPath, $fileName);
+
+                    $fileManaged = new FileManaged();
+                    $fileManaged->setOriginName($originName);
+                    $fileManaged->setFileName($fileName);
+                    $fileManaged->setMimeType($mimeType);
+                    $fileManaged->setPath($uploadPath . '/' . $fileName);
+                    $fileManaged->setFileSize($filesize);
+
+                    $data->addFile($fileManaged);
+                }
+
+//                dd($data);
                 $data->setPost($post);
                 $entityManager->persist($data);
                 $entityManager->flush();
