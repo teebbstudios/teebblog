@@ -43,7 +43,8 @@ class CommentType extends AbstractType
             ])
             ->add('message')
             ->add('files', CollectionType::class, [
-                'entry_type' => FileType::class,
+//                'entry_type' => FileType::class,
+                'entry_type' => FileManagedType::class,
                 'entry_options' => [
                     'label' => false,
                     'attr' => [
