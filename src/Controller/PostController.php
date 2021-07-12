@@ -50,27 +50,28 @@ class PostController extends AbstractController
             if ($commentForm->get('submit')->isClicked()) {
                 /**@var Comment $data * */
                 $data = $commentForm->getData();
+//                dd($data);
 
-                $files = $request->files->all();
-                /**@var UploadedFile $file**/
-                foreach ($files['comment']['files'] as $file){
-                    $originName = $file->getClientOriginalName();
-                    $fileName = pathinfo(htmlspecialchars($originName), PATHINFO_FILENAME) . '-' . $file->getFilename() . '.' . $file->getClientOriginalExtension();
-                    $uploadPath = $this->getParameter('base_path');
-                    $mimeType = $file->getMimeType();
-                    $filesize = $file->getSize();
-
-                    $file->move($uploadPath, $fileName);
-
-                    $fileManaged = new FileManaged();
-                    $fileManaged->setOriginName($originName);
-                    $fileManaged->setFileName($fileName);
-                    $fileManaged->setMimeType($mimeType);
-                    $fileManaged->setPath($uploadPath . '/' . $fileName);
-                    $fileManaged->setFileSize($filesize);
-
-                    $data->addFile($fileManaged);
-                }
+//                $files = $request->files->all();
+//                /**@var UploadedFile $file**/
+//                foreach ($files['comment']['files'] as $file){
+//                    $originName = $file->getClientOriginalName();
+//                    $fileName = pathinfo(htmlspecialchars($originName), PATHINFO_FILENAME) . '-' . $file->getFilename() . '.' . $file->getClientOriginalExtension();
+//                    $uploadPath = $this->getParameter('base_path');
+//                    $mimeType = $file->getMimeType();
+//                    $filesize = $file->getSize();
+//
+//                    $file->move($uploadPath, $fileName);
+//
+//                    $fileManaged = new FileManaged();
+//                    $fileManaged->setOriginName($originName);
+//                    $fileManaged->setFileName($fileName);
+//                    $fileManaged->setMimeType($mimeType);
+//                    $fileManaged->setPath($uploadPath . '/' . $fileName);
+//                    $fileManaged->setFileSize($filesize);
+//
+//                    $data->addFile($fileManaged);
+//                }
 
 //                dd($data);
                 $data->setPost($post);
