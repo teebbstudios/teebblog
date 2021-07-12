@@ -5,6 +5,9 @@
         <div class="media-body">
             <h5 class="mt-0">{{ comment.author }}</h5>
             {{ comment.message }}
+            {% for file in comment.files %}
+                <img src="{{ asset(file.path)|imagine_filter('my_thumb') }}" alt="{{ file.originName }}" class="img-thumbnail">
+            {% endfor %}
             <button class="btn btn-sm btn-link js-reply-comment-btn" data-post-id="{{ post.id }}" data-parent-id="{{ comment.id }}">回复</button>
             {% for childComment in comment.children %}
                 {{ macro.show_comments(childComment, post) }}
