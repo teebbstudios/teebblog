@@ -1537,16 +1537,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.3.2",
+            "version": "v3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "9672b09ce29c910fd74fe7769dd709c738ea43d4"
+                "reference": "19d977b7522759492bfc2c3c0c3fd24e125946a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/9672b09ce29c910fd74fe7769dd709c738ea43d4",
-                "reference": "9672b09ce29c910fd74fe7769dd709c738ea43d4",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/19d977b7522759492bfc2c3c0c3fd24e125946a7",
+                "reference": "19d977b7522759492bfc2c3c0c3fd24e125946a7",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1626,7 +1626,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.3.2"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.4.2"
             },
             "funding": [
                 {
@@ -1634,7 +1634,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-26T18:53:27+00:00"
+            "time": "2021-07-06T18:33:30+00:00"
         },
         {
             "name": "fakerphp/faker",

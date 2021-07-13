@@ -1,0 +1,7 @@
+{#{{ dump() }}#}
+{% for file in field.value %}
+    <a href="{{ asset(file.path) }}" data-lightbox="{{ entity.instance.id }}">
+        <img src="{{ asset(file.path)|imagine_filter('my_thumb') }}" alt="{{ file.originName }}"
+             class="img-thumbnail">
+    </a>
+{% endfor %}
