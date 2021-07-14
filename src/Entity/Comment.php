@@ -3,15 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Comment
 {
+    use DateTimeTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,15 +37,15 @@ class Comment
      */
     private $message;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
+//    /**
+//     * @ORM\Column(type="datetime", nullable=true)
+//     */
+//    private $createdAt;
+//
+//    /**
+//     * @ORM\Column(type="datetime", nullable=true)
+//     */
+//    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
@@ -121,29 +124,36 @@ class Comment
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
+//    public function getCreatedAt(): ?\DateTimeInterface
+//    {
+//        return $this->createdAt;
+//    }
+//
+//    /**
+//     * @ORM\PrePersist
+//     */
+//    public function setCreatedAt(): self
+//    {
+//        $this->createdAt = new \DateTime();
+//
+//        return $this;
+//    }
+//
+//    public function getUpdatedAt(): ?\DateTimeInterface
+//    {
+//        return $this->updatedAt;
+//    }
+//
+//    /**
+//     * @ORM\PrePersist
+//     * @ORM\PreUpdate
+//     */
+//    public function setUpdatedAt(): self
+//    {
+//        $this->updatedAt = new \DateTime();
+//
+//        return $this;
+//    }
 
     public function getPost(): ?Post
     {
