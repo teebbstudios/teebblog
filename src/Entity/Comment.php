@@ -56,11 +56,12 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
      */
     private $children;
 
@@ -70,7 +71,7 @@ class Comment
     private $level = 1;
 
     /**
-     * @ORM\ManyToMany(targetEntity=FileManaged::class, cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=FileManaged::class, cascade={"persist"})
      * @ORM\JoinTable(name="comments_files",
      *      joinColumns={@ORM\JoinColumn(name="comment_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true)}
