@@ -30,3 +30,7 @@ services:
 
     App\Factory\PostFactory:
         public: true
+
+    App\Listener\CommentSubmitListener:
+        tags:
+            - {name: 'kernel.event_listener', event: App\Event\AfterCommentSubmitEvent, method: 'onCommentSubmit'}

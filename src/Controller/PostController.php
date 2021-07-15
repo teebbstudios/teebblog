@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\FileManaged;
 use App\Entity\Post;
+use App\Event\AfterCommentSubmitEvent;
 use App\Form\CommentType;
 use App\Form\PostType;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -40,7 +42,8 @@ class PostController extends AbstractController
     #[Route('/post/{id1}', name: 'post_show', methods: ['GET', 'POST'])]
     #[ParamConverter('post', options: ['id' => 'id1'])]
     public function show(Request $request, Post $post, EntityManagerInterface $entityManager,
-                         PaginatorInterface $paginator, CommentRepository $commentRepository): Response
+                         PaginatorInterface $paginator, CommentRepository $commentRepository,
+                         EventDispatcherInterface $eventDispatcher): Response
     {
         $commentForm = $this->createForm(CommentType::class);
 
@@ -51,7 +54,10 @@ class PostController extends AbstractController
                 /**@var Comment $data * */
                 $data = $commentForm->getData();
 //                dd($data);
-
+                $event = new AfterCommentSubmitEvent($data);
+                /**@var AfterCommentSubmitEvent $modifiedEvent**/
+                $modifiedEvent = $eventDispatcher->dispatch($event);
+                $data = $modifiedEvent->getComment();
 //                $files = $request->files->all();
 //                /**@var UploadedFile $file**/
 //                foreach ($files['comment']['files'] as $file){
