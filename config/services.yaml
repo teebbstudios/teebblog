@@ -9,6 +9,11 @@ parameters:
     max_comment_level: 5
     page_limit: 5
     locale: 'zh_CN'
+
+    strip_words:
+        - 'hello'
+        - 'world'
+        - 'abc'
 services:
     # default configuration for services in *this* file
     _defaults:
