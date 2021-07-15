@@ -7,11 +7,13 @@ use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @ORM\EntityListeners({"App\Listener\CommentListener"})
+ * @Assert\EnableAutoMapping
  */
 class Comment
 {
@@ -25,6 +27,7 @@ class Comment
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\DisableAutoMapping()
      */
     private $author;
 

@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 class CommentType extends AbstractType
@@ -29,6 +32,10 @@ class CommentType extends AbstractType
                     'class' => 'form-control-sm w-50'
                 ],
                 'required' => true,
+//                'constraints' => [
+//                    new NotNull(['message'=>'评论作者不能为空']),
+//                    new Length(['min'=> 1, 'max'=>20])
+//                ]
             ])
             ->add('email', EmailType::class, [
                 'row_attr' => [
@@ -39,7 +46,11 @@ class CommentType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'form-control-sm w-50'
-                ]
+                ],
+//                'constraints' => [
+//                    new Email(),
+//                    new NotNull()
+//                ]
             ])
             ->add('message')
             ->add('files', CollectionType::class, [
