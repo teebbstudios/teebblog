@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use App\Validator\FileManaged;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -60,12 +61,18 @@ class CommentType extends AbstractType
                     'label' => false,
                     'attr' => [
                         'onchange' => 'fixFileInputName(this)'
+                    ],
+                    'constraints' => [
+                        new FileManaged([
+                            'image/*'
+                        ])
                     ]
                 ],
                 'allow_add' => true,
                 'attr' => [
                     'class' => 'input-row-wrapper'
                 ],
+
 //                'mapped' => false
             ])
 //            ->add('createdAt')
