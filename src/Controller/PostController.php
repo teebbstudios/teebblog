@@ -57,7 +57,8 @@ class PostController extends AbstractController
                 $event = new AfterCommentSubmitEvent($data);
                 /**@var AfterCommentSubmitEvent $modifiedEvent**/
                 $modifiedEvent = $eventDispatcher->dispatch($event);
-                $data = $modifiedEvent->getComment();
+//                $data = $modifiedEvent->getComment();
+                $data = $modifiedEvent->getSubject();
 //                $files = $request->files->all();
 //                /**@var UploadedFile $file**/
 //                foreach ($files['comment']['files'] as $file){

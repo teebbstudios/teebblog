@@ -20,9 +20,13 @@ class AfterCommentSubmitSubscriber implements EventSubscriberInterface
 
     public function onAfterCommentSubmitEvent(AfterCommentSubmitEvent $event)
     {
+        if ($event->isPropagationStopped()){
+            return;
+        }
         $words = $this->parameterBag->get('strip_words');
 
-        $comment = $event->getComment();
+//        $comment = $event->getComment();
+        $comment = $event->getSubject();
         $message = $comment->getMessage();
 
         $comment->setMessage($this->stripWords($message, $words));

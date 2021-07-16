@@ -38,4 +38,4 @@ services:
 
     App\Listener\CommentSubmitListener:
         tags:
-            - {name: 'kernel.event_listener', event: App\Event\AfterCommentSubmitEvent, method: 'onCommentSubmit'}
+            - {name: 'kernel.event_listener', event: App\Event\AfterCommentSubmitEvent, method: 'onCommentSubmit', priority: 10}
