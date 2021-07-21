@@ -38,9 +38,15 @@ class AppFixtures extends Fixture
         $expiredUser->setExpiredAt(new \DateTime('-1 day'));
         $expiredUser->setPassword($this->userPasswordHasher->hashPassword($expiredUser, '123'));
 
+        $tom = new User();
+        $tom->setUsername('tom');
+        $tom->setPassword($this->userPasswordHasher->hashPassword($tom, 'tom'));
+
+
         $manager->persist($admin);
         $manager->persist($deletedUser);
         $manager->persist($expiredUser);
+        $manager->persist($tom);
 
         $manager->flush();
     }
