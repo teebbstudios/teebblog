@@ -39,6 +39,8 @@
     <hr>
 
     <!-- Comments Form -->
+{#    {% if app.user %}#}
+    {% if is_granted('ROLE_USER') %}
     <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
@@ -55,6 +57,9 @@
             {{ form_end(comment_form) }}
         </div>
     </div>
+    {% else %}
+        您需要<a href="{{ path('app_login') }}">登录</a>后，才可以提交评论。
+    {% endif %}
 
     <!-- Single Comment -->
     {% for comment in pagination %}
