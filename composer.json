@@ -24,6 +24,7 @@
         "symfony/framework-bundle": "5.3.*",
         "symfony/mime": "5.3.*",
         "symfony/proxy-manager-bridge": "5.3.*",
+        "symfony/rate-limiter": "5.3.*",
         "symfony/runtime": "5.3.*",
         "symfony/twig-bundle": "5.3.*",
         "symfony/validator": "5.3.*",
