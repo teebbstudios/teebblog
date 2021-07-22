@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Security\Voter\PostVoter;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -55,5 +58,16 @@ class PostCrudController extends AbstractCrudController
     {
         return $filters->add(ChoiceFilter::new('status')
             ->setChoices(['draft' => 'draft', 'published' => 'published']));
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->update(Crud::PAGE_INDEX, Action::EDIT,
+            function (Action $action) {
+                return $action->displayIf(fn($entity) => $this->isGranted(PostVoter::POST_OWNER_EDIT, $entity));
+            })->update(Crud::PAGE_INDEX, Action::DELETE,
+            function (Action $action) {
+                return $action->displayIf(fn($entity) => $this->isGranted(PostVoter::POST_OWNER_DELETE, $entity));
+            });
     }
 }
