@@ -20,7 +20,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
-                {% if app.user %}
+{#                {% if app.user %}#}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ app.user.userIdentifier }}
@@ -29,6 +30,9 @@
                             <a class="dropdown-item" href="{{ path('app_logout') }}">退出</a>
                         </div>
                     </div>
+                {% endif %}
+                {% if is_granted('IS_IMPERSONATOR') %}
+                    <a href="{{ impersonation_exit_path(path('post_index') ) }}">Exit impersonation</a>
                 {% endif %}
             </ul>
         </div>

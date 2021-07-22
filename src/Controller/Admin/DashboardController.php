@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
 //        if (!$this->isGranted('ROLE_SUPER_ADMIN')){
 //            throw new AccessDeniedException();
 //        }
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN ');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return parent::index();
     }
 

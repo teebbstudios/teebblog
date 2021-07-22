@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
     {
         $admin = new User();
         $admin->setUsername('admin');
-        $admin->setRoles(['ROLE_SUPER_ADMIN']);
+        $admin->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ALLOWED_TO_SWITCH']);
         $admin->setPassword($this->userPasswordHasher->hashPassword($admin, 'admin'));
 
         $deletedUser = new User();
