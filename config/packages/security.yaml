@@ -1,4 +1,10 @@
 security:
+    role_hierarchy:
+        ROLE_EDITOR: ROLE_USER
+        ROLE_CHECKER: ROLE_USER
+        ROLE_ADMIN: [ROLE_EDITOR, ROLE_CHECKER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     encoders:
         App\Entity\User:
             algorithm: auto

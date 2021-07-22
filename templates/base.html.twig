@@ -30,6 +30,15 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
+            {% if is_granted('ROLE_EDITOR') %}
+                当前用户是编辑角色
+            {% endif %}
+            {% if is_granted('ROLE_CHECKER') %}
+                当前用户是审核角色
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                当前用户是管理员角色
+            {% endif %}
 
             {% block content %}
             {% endblock %}

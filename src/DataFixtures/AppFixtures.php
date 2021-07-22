@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
     {
         $admin = new User();
         $admin->setUsername('admin');
-        $admin->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ALLOWED_TO_SWITCH']);
+        $admin->setRoles(['ROLE_SUPER_ADMIN']);
         $admin->setPassword($this->userPasswordHasher->hashPassword($admin, 'admin'));
 
         $deletedUser = new User();
@@ -42,11 +42,30 @@ class AppFixtures extends Fixture
         $tom->setUsername('tom');
         $tom->setPassword($this->userPasswordHasher->hashPassword($tom, 'tom'));
 
+        $editor = new User();
+        $editor->setUsername('editor');
+        $editor->setRoles(['ROLE_EDITOR']);
+        $editor->setPassword($this->userPasswordHasher->hashPassword($editor, 'editor'));
+
+        $checker = new User();
+        $checker->setUsername('checker');
+        $checker->setRoles(['ROLE_CHECKER']);
+        $checker->setPassword($this->userPasswordHasher->hashPassword($checker, 'checker'));
+
+        $simpleAdmin = new User();
+        $simpleAdmin->setUsername('simple_admin');
+        $simpleAdmin->setRoles(['ROLE_ADMIN']);
+        $simpleAdmin->setPassword($this->userPasswordHasher->hashPassword($simpleAdmin, 'admin'));
+
 
         $manager->persist($admin);
         $manager->persist($deletedUser);
         $manager->persist($expiredUser);
         $manager->persist($tom);
+
+        $manager->persist($editor);
+        $manager->persist($checker);
+        $manager->persist($simpleAdmin);
 
         $manager->flush();
     }
