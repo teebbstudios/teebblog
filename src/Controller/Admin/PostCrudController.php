@@ -6,6 +6,7 @@ use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -34,6 +35,7 @@ class PostCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]'),
             TextareaField::new('summary'),
             TextEditorField::new('body'),
+            AssociationField::new('author'),
             ChoiceField::new('status')
                 ->setChoices(fn() => ['draft' => 'draft', 'published' => 'published']),
             TimeField::new('createdAt')

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Factory\PostFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -24,6 +25,12 @@ class PostFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $userRepo = $manager->getRepository(User::class);
+        $editor = $userRepo->findOneBy(['username' => 'editor']);
+        $simpleAdmin = $userRepo->findOneBy(['username' => 'simple_admin']);
+        $admin = $userRepo->findOneBy(['username' => 'admin']);
+        $userArray = [$editor, $simpleAdmin, $admin];
+
         $lastPost = null;
         for ($i = 0; $i < 20; $i++) {
             $post = $this->postFactory->create($this->faker->sentence(), $this->faker->paragraph());
@@ -38,6 +45,8 @@ class PostFixtures extends Fixture
                 $post->setStatus('published');
                 $lastPost=$post;
             }
+            $authorIndex = array_rand($userArray);
+            $post->setAuthor($userArray[$authorIndex]);
 
             $manager->persist($post);
         }
