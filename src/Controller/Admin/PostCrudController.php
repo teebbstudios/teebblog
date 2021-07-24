@@ -38,7 +38,7 @@ class PostCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]'),
             TextareaField::new('summary'),
             TextEditorField::new('body'),
-            AssociationField::new('author'),
+            AssociationField::new('author')->onlyOnIndex(),
             ChoiceField::new('status')
                 ->setChoices(fn() => ['draft' => 'draft', 'published' => 'published']),
             TimeField::new('createdAt')
