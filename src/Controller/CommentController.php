@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CommentController extends AbstractController
+class CommentController extends BaseController
 {
     #[
         Route('/post/{post_id}/comment/{comment_id}/reply',options: ['expose' => true], name: 'reply_comment'),
@@ -66,7 +66,8 @@ class CommentController extends AbstractController
             $em->persist($data);
             $em->flush();
 
-            $this->addFlash('success', '您的评论已成功提交！');
+//            $this->addFlash('success', '您的评论已成功提交！');
+            $this->addFlashMessages('success', 'comment_submit_message');
 
             return $this->redirectToRoute('post_show', ['id1' => $post->getId()]);
         }

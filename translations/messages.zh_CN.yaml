@@ -1,3 +1,4 @@
 Post: '文章'
 ID: 'ID'
 Title: '标题'
+comment_submit_message: '%name%, 您的评论已提交。'

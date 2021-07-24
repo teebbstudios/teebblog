@@ -20,9 +20,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
-class PostController extends AbstractController
+class PostController extends BaseController
 {
     #[Route('/', name: 'post_index', methods: ['GET'])]
     public function index(Request $request, PostRepository $postRepository, Security $security): Response
@@ -47,6 +48,7 @@ class PostController extends AbstractController
     #[ParamConverter('post', options: ['id' => 'id1'])]
     public function show(Request $request, Post $post, EntityManagerInterface $entityManager,
                          PaginatorInterface $paginator, CommentRepository $commentRepository,
+                         TranslatorInterface $translator,
                          EventDispatcherInterface $eventDispatcher): Response
     {
         $commentForm = $this->createForm(CommentType::class);
@@ -88,9 +90,11 @@ class PostController extends AbstractController
                 $data->setPost($post);
                 $entityManager->persist($data);
                 $entityManager->flush();
+
+                $this->addFlashMessages('success', 'comment_submit_message',['%name%'=>$data->getAuthor()]);
+//            $this->addFlash('success', $translator->trans('comment_submit_message'));
             }
 
-            $this->addFlash('success', '您的评论已成功提交！');
         }
 
         $query = $commentRepository->getPaginationQuery($post);
