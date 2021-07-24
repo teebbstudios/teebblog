@@ -58,7 +58,7 @@
         </div>
     </div>
     {% else %}
-        您需要<a href="{{ path('app_login') }}">登录</a>后，才可以提交评论。
+        {{ 'login_for_comment'|trans({'%login_path%': path('app_login')})|raw }}
     {% endif %}
 
     <!-- Single Comment -->
