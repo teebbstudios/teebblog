@@ -22,10 +22,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
+#[Route('/{_locale<%support_locales%>}')]
 class PostController extends BaseController
 {
-    #[Route('/', name: 'post_index', methods: ['GET'])]
+    #[Route('/', name: 'post_index',
+//        requirements: ['_locale'=> 'en|zh_CN'],
+        methods: ['GET']
+    )]
     public function index(Request $request, PostRepository $postRepository, Security $security): Response
     {
 //        $user = $this->getUser();
