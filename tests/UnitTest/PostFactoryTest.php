@@ -17,7 +17,7 @@ class PostFactoryTest extends TestCase
         $postObj->setTitle('这是一个标题');
         $postObj->setSummary("这是摘要");
         $postObj->setBody('这是正文');
-        $postObj->setStatus('draft');
+        $postObj->setStatus(['draft']);
 
 //        $factory->expects($this->once())->method('create')
 //            ->with("这是一个标题", "这是正文", "这是摘要")
@@ -26,7 +26,7 @@ class PostFactoryTest extends TestCase
         $postObj2->setTitle('这是第二个文章标题');
         $postObj2->setBody('<h1>这是第二个文章正文</h1>');
         $postObj2->setSummary('这是第二个文章正文');
-        $postObj2->setStatus('draft');
+        $postObj2->setStatus(['draft']);
 
         $factory->expects($this->exactly(2))->method('create')
             ->withConsecutive(["这是一个标题", "这是正文", "这是摘要"], ['这是第二个文章标题', '<h1>这是第二个文章正文</h1>'])
@@ -36,7 +36,7 @@ class PostFactoryTest extends TestCase
 
         $this->assertInstanceOf(Post::class, $post);
         $this->assertSame($postObj, $post);
-        $this->assertSame('draft', $post->getStatus());
+        $this->assertArrayHasKey('draft', $post->getStatus());
 
         $post2 = $factory->create('这是第二个文章标题', '<h1>这是第二个文章正文</h1>');
         $this->assertSame($postObj2, $post2);

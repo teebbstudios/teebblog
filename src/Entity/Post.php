@@ -39,7 +39,7 @@ class Post
     private $body;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $status;
 
@@ -116,12 +116,12 @@ class Post
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?array
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    public function setStatus(?array $status, $context = []): self
     {
         $this->status = $status;
 

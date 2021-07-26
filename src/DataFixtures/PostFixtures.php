@@ -35,14 +35,14 @@ class PostFixtures extends Fixture
         for ($i = 0; $i < 20; $i++) {
             $post = $this->postFactory->create($this->faker->sentence(), $this->faker->paragraph());
             if ($this->faker->boolean()) {
-                $post->setStatus('published');
+                $post->setStatus(['published']);
             }
 
             $image = '00' . $this->faker->randomDigit() . '.jpg';
             $post->setPostImage($image);
 
             if ($i == 19) {
-                $post->setStatus('published');
+                $post->setStatus(['published']);
                 $lastPost=$post;
             }
             $authorIndex = array_rand($userArray);
