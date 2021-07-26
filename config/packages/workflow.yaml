@@ -1,0 +1,33 @@
+framework:
+    workflows:
+        blog_publishing:
+            type: 'workflow' # or 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'status'
+            supports:
+                - App\Entity\Post
+            initial_marking: draft
+            places:
+                - draft
+                - wait_for_review
+                - wait_for_check
+                - approved_by_editor
+                - approved_by_checker
+                - published
+            transitions:
+                review_request:
+                    from: draft
+                    to: [wait_for_review, wait_for_check]
+                editor_review:
+                    from: wait_for_review
+                    to: approved_by_editor
+                checker_check:
+                    from: wait_for_check
+                    to: approved_by_checker
+                publish:
+                    from: [approved_by_editor, approved_by_checker]
+                    to: published
+
