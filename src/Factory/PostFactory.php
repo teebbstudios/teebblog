@@ -19,7 +19,7 @@ class PostFactory
         } else {
             $post->setSummary($this->sliceBodyToSummary($body));
         }
-        $post->setStatus([$status]);
+        $post->setStatus([$status => 1]);
 
         return $post;
     }
