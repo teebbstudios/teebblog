@@ -15,6 +15,11 @@ parameters:
         - 'world'
         - 'abc'
     support_locales: en|zh_CN|fr
+
+    send_email: admin@teebblog.com
+    editor_email: editor@teebblog.com
+    checker_email: checker@teebblog.com
+
 services:
     # default configuration for services in *this* file
     _defaults:
