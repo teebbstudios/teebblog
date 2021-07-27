@@ -22,9 +22,11 @@ framework:
                     from: draft
                     to: [wait_for_review, wait_for_check]
                 editor_review:
+                    guard: 'is_granted(''ROLE_EDITOR'')'
                     from: wait_for_review
                     to: approved_by_editor
                 checker_check:
+                    guard: 'is_granted(''ROLE_CHECKER'')'
                     from: wait_for_check
                     to: approved_by_checker
                 publish:
