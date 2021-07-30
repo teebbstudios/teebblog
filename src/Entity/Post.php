@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PostRepository;
 use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\HasLifecycleCallbacks
  */
+#[ApiResource]
 class Post
 {
     use DateTimeTrait;
