@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentRepository;
 use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\EntityListeners({"App\Listener\CommentListener"})
  * @Assert\EnableAutoMapping
  */
+#[ApiResource]
 class Comment
 {
     use DateTimeTrait;

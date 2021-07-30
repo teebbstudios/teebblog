@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FileManagedRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=FileManagedRepository::class)
  * @ORM\Table(name="file")
  */
+#[ApiResource]
 class FileManaged
 {
     /**

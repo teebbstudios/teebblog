@@ -9,6 +9,7 @@ use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -18,11 +19,16 @@ use Doctrine\ORM\Mapping as ORM;
     collectionOperations: ['get', 'post'],
     itemOperations: [
         'get' => [
-            'controller' => NotFoundAction::class,
-            'read' => false,
-            'output' => false,
-        ],
-    ]
+            'normalization_context' => ['groups' => ['post:item:get']]
+        ]
+//        'get' => [
+//            'controller' => NotFoundAction::class,
+//            'read' => false,
+//            'output' => false,
+//        ],
+    ],
+    denormalizationContext: ['groups'=> ['post:write']],
+    normalizationContext: ['groups'=> ['post:read']]
 )]
 class Post
 {
@@ -33,21 +39,25 @@ class Post
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(['post:read', 'post:item:get'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['post:read','post:write', 'post:item:get'])]
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    #[Groups(['post:read','post:write', 'post:item:get'])]
     private $summary;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    #[Groups(['post:read','post:write', 'post:item:get'])]
     private $body;
 
     /**
@@ -74,12 +84,14 @@ class Post
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Groups(['post:read'])]
     private $postImage;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups(['post:write', 'post:item:get'])]
     private $author;
 
     public function __construct()
