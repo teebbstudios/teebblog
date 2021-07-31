@@ -87,14 +87,14 @@ class Post
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    #[Groups(['post:read'])]
+    #[Groups(['post:read', 'post:item:get'])]
     private $postImage;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    #[Groups(['post:write', 'post:item:get'])]
+    #[Groups(['post:item:get'])]
 //    #[ApiProperty(readableLink: true, writableLink: true)]
     private $author;
 
