@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\PostRepository;
 use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -79,6 +81,7 @@ class Post
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
      * @ORM\OrderBy({"id" = "DESC"})
      */
+    #[ApiSubresource]
     private $comments;
 
     /**
@@ -88,10 +91,11 @@ class Post
     private $postImage;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     #[Groups(['post:write', 'post:item:get'])]
+//    #[ApiProperty(readableLink: true, writableLink: true)]
     private $author;
 
     public function __construct()
