@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\ApiFileController;
 use App\Repository\FileManagedRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,36 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=FileManagedRepository::class)
  * @ORM\Table(name="file")
  */
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get',
+        'post' => [
+            'controller' => ApiFileController::class,
+            'method' => 'post',
+            'deserialize' => false,
+            'openapi_context' => [
+                'requestBody' => [
+                    'content' => [
+                        'multipart/form-data' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'file' => [
+                                        'type' => 'string',
+                                        'format' => 'binary',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]
+],
+    itemOperations: [
+        'get'
+    ]
+)]
 class FileManaged
 {
     /**
@@ -44,6 +74,8 @@ class FileManaged
      * @ORM\Column(type="string", length=255)
      */
     private $path;
+
+    private $fileUrl;
 
     public function getId(): ?int
     {
@@ -109,4 +141,22 @@ class FileManaged
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFileUrl()
+    {
+        return $this->fileUrl;
+    }
+
+    /**
+     * @param mixed $fileUrl
+     */
+    public function setFileUrl($fileUrl): void
+    {
+        $this->fileUrl = $fileUrl;
+    }
+
+
 }
