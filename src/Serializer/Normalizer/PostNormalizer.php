@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-class PostNormalizer implements NormalizerInterface, DenormalizerInterface, CacheableSupportsMethodInterface
+class PostNormalizer implements DenormalizerInterface, CacheableSupportsMethodInterface
 {
     private $normalizer;
     /**
@@ -36,20 +36,20 @@ class PostNormalizer implements NormalizerInterface, DenormalizerInterface, Cach
         $this->userRepository = $userRepository;
     }
 
-    public function normalize($object, $format = null, array $context = []): array
-    {
-        $data = $this->normalizer->normalize($object, $format, $context);
-
-        $request = $this->requestStack->getCurrentRequest();
-        // Here: add, edit, or delete some data
-        $data['post_image_url'] = $request->getSchemeAndHttpHost() .'/uploads/images/'. $data['postImage'];
-        return $data;
-    }
-
-    public function supportsNormalization($data, $format = null): bool
-    {
-        return $data instanceof \App\Entity\Post;
-    }
+//    public function normalize($object, $format = null, array $context = []): array
+//    {
+//        $data = $this->normalizer->normalize($object, $format, $context);
+//
+//        $request = $this->requestStack->getCurrentRequest();
+//        // Here: add, edit, or delete some data
+//        $data['post_image_url'] = $request->getSchemeAndHttpHost() .'/uploads/images/'. $data['postImage'];
+//        return $data;
+//    }
+//
+//    public function supportsNormalization($data, $format = null): bool
+//    {
+//        return $data instanceof \App\Entity\Post;
+//    }
 
     public function hasCacheableSupportsMethod(): bool
     {

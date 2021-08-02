@@ -98,6 +98,9 @@ class Post
 //    #[ApiProperty(readableLink: true, writableLink: true)]
     private $author;
 
+    #[Groups(['post:read', 'post:item:get'])]
+    private $postImageUrl;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -245,4 +248,22 @@ class Post
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPostImageUrl()
+    {
+        return $this->postImageUrl;
+    }
+
+    /**
+     * @param mixed $postImageUrl
+     */
+    public function setPostImageUrl($postImageUrl): void
+    {
+        $this->postImageUrl = $postImageUrl;
+    }
+
+
 }
