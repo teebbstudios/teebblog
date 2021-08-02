@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\CommentRepository;
 use App\Utils\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,6 +19,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Assert\EnableAutoMapping
  */
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: [
+    'message' => 'partial',
+    'post.id' => 'exact'
+])]
 class Comment
 {
     use DateTimeTrait;
