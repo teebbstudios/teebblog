@@ -34,6 +34,7 @@
         "symfony/property-info": "5.3.*",
         "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/rate-limiter": "5.3.*",
+        "symfony/requirements-checker": "^2.0",
         "symfony/runtime": "5.3.*",
         "symfony/security-bundle": "5.3.*",
         "symfony/serializer": "5.3.*",
@@ -85,7 +86,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "requirements-checker": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
