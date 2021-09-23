@@ -1,5 +1,13 @@
 # 《Symfony 5 全面开发》视频教程中的博客项目，欢迎学习。
 
+### 《Symfony 5 全面开发》视频教程现已免费（视频内容未经允许禁止转载），视频地址：
+|  网站   | 视频播放URL  |
+|  ----  | ----  |
+| teebb  | https://www.teebb.com/course-detail/symfony5-quanmiankaifa |
+| bilibili | https://www.bilibili.com/medialist/play/452133624?business=space_series&business_id=355222 |
+| youtube | https://www.youtube.com/playlist?list=PLmPHClpYq_IP75X-lE8qQb-0__W_nS69J |
+
+### 代码使用方法
 1. 下载后使用composer安装依赖的php包
 ```bash
     composer install  #将会安装所有依赖包
@@ -39,4 +47,4 @@
     http://127.0.0.1:8000/admin
 ```
 
-## 本项目遵循MIT开源协议，欢迎下载学习。
+## 本项目代码遵循MIT开源协议，欢迎下载学习。
