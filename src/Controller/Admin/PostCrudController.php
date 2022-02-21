@@ -163,7 +163,7 @@ class PostCrudController extends AbstractCrudController
             ->generateUrl();
     }
 
-    public static function getSubscribedServices()
+    public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
             'workflow.blog_publishing' => '?' . WorkflowInterface::class
