@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fd6d3d6e9ece1dd972d151016eebc3a",
+    "content-hash": "82e767180db8abfc2827c1491c34dc4a",
     "packages": [
         {
             "name": "api-platform/core",
@@ -8706,6 +8706,37 @@
             "time": "2022-01-26T16:05:39+00:00"
         },
         {
+            "name": "teebbstudios/uploader-bundle",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../TeebbUploaderBundle",
+                "reference": "3e665982b2e35b875dd0a71c5e7f6b3b15110ea8"
+            },
+            "require": {
+                "symfony/http-kernel": "^5.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Teebb\\UploaderBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "伟伟权",
+                    "email": "qww.zone@gmail.com"
+                }
+            ],
+            "description": "For symfony file upload.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "v3.3.8",
             "source": {
@@ -11953,7 +11984,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "teebbstudios/uploader-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

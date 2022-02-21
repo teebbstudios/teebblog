@@ -1,7 +1,4 @@
 {
-    "api-platform/api-pack": {
-        "version": "v1.3.0"
-    },
     "api-platform/core": {
         "version": "2.5",
         "recipe": {
@@ -366,9 +363,6 @@
             "config/packages/dev/debug.yaml"
         ]
     },
-    "symfony/debug-pack": {
-        "version": "v1.0.9"
-    },
     "symfony/dependency-injection": {
         "version": "v5.3.2"
     },
@@ -523,9 +517,6 @@
     "symfony/options-resolver": {
         "version": "v5.3.0"
     },
-    "symfony/orm-pack": {
-        "version": "v2.1.0"
-    },
     "symfony/panther": {
         "version": "1.0",
         "recipe": {
@@ -582,9 +573,6 @@
     },
     "symfony/process": {
         "version": "v5.3.2"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
     },
     "symfony/property-access": {
         "version": "v5.3.0"
@@ -653,9 +641,6 @@
     "symfony/serializer": {
         "version": "v5.3.2"
     },
-    "symfony/serializer-pack": {
-        "version": "v1.0.4"
-    },
     "symfony/service-contracts": {
         "version": "v2.4.0"
     },
@@ -664,9 +649,6 @@
     },
     "symfony/string": {
         "version": "v5.3.2"
-    },
-    "symfony/test-pack": {
-        "version": "v1.0.8"
     },
     "symfony/translation": {
         "version": "5.3",
@@ -699,9 +681,6 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
-    },
-    "symfony/twig-pack": {
-        "version": "v1.0.1"
     },
     "symfony/uid": {
         "version": "v5.3.3"
@@ -778,6 +757,9 @@
     },
     "symfony/yaml": {
         "version": "v5.3.2"
+    },
+    "teebbstudios/uploader-bundle": {
+        "version": "dev-main"
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
