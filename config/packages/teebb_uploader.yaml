@@ -1,0 +1,2 @@
+teebb_uploader:
+    upload_dir: '%kernel.project_dir%/public/teebb_uploader'
