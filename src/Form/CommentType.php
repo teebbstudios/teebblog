@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Teebb\UploaderBundle\Form\FileManagedType;
 
 class CommentType extends AbstractType
 {
