@@ -17,6 +17,7 @@
             <button class="btn btn-sm btn-link js-reply-comment-btn" data-post-id="{{ post.id }}"
                     data-parent-id="{{ comment.id }}">回复
             </button>
+            <a href="{{ path('edit_comment', {id: comment.id}) }}">编辑</a>
             {% for childComment in comment.children %}
                 {{ macro.show_comments(childComment, post) }}
             {% endfor %}

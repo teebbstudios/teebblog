@@ -76,4 +76,16 @@ class CommentController extends BaseController
             'reply_comment_form' => $replyComment->createView(),
         ]);
     }
+
+    #[
+        Route('/comment/{id}', name: 'edit_comment')
+    ]
+    public function editComment(Request $request, Comment $comment, EntityManagerInterface $em): Response
+    {
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
+        return $this->render('comment/edit_comment.html.twig', [
+            'comment_form' => $commentForm->createView()
+        ]);
+    }
 }
