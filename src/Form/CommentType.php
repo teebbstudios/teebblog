@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use App\Entity\SimpleFile;
 use Teebb\UploaderBundle\Validator\FileManaged;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -67,7 +68,8 @@ class CommentType extends AbstractType
                         new FileManaged([
                             'image/*'
                         ])
-                    ]
+                    ],
+                    'file_class' => SimpleFile::class
                 ],
                 'allow_add' => true,
                 'attr' => [
