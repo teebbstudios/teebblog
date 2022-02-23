@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-use App\Validator\FileManaged;
+use Teebb\UploaderBundle\Validator\FileManaged;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
