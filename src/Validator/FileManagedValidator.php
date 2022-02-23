@@ -18,7 +18,7 @@ class FileManagedValidator extends ConstraintValidator
 //dd($value);
 //        foreach ($value as $file)
 //        {
-            if ($value instanceof \App\Entity\FileManaged){
+            if ($value instanceof \App\Entity\SimpleFile){
                 $mimeType = $value->getMimeType();
 
                 foreach ($constraint->mimeTypes as $allowMimeType){

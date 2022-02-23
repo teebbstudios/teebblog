@@ -7,8 +7,8 @@
             {{ comment.message }}
             <div>
                 {% for file in comment.files %}
-                    <a href="{{ asset(file.path) }}" data-lightbox="{{ comment.id }}">
-                        <img src="{{ asset(file.path)|imagine_filter('my_thumb') }}" alt="{{ file.originName }}"
+                    <a href="{{ asset(file.fileName, 'simple_file_path') }}" data-lightbox="{{ comment.id }}">
+                        <img src="{{ asset(file.fileName, 'simple_file_path')|imagine_filter('my_thumb') }}" alt="{{ file.originName }}"
                              class="img-thumbnail">
                     </a>
                 {% endfor %}

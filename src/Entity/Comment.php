@@ -83,7 +83,7 @@ class Comment
     private $level = 1;
 
     /**
-     * @ORM\ManyToMany(targetEntity=FileManaged::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=SimpleFile::class, cascade={"persist"})
      * @ORM\JoinTable(name="comments_files",
      *      joinColumns={@ORM\JoinColumn(name="comment_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true)}
@@ -242,14 +242,14 @@ class Comment
     }
 
     /**
-     * @return Collection|FileManaged[]
+     * @return Collection|SimpleFile[]
      */
     public function getFiles(): Collection
     {
         return $this->files;
     }
 
-    public function addFile(FileManaged $file): self
+    public function addFile(SimpleFile $file): self
     {
         if (!$this->files->contains($file)) {
             $this->files[] = $file;
@@ -258,7 +258,7 @@ class Comment
         return $this;
     }
 
-    public function removeFile(FileManaged $file): self
+    public function removeFile(SimpleFile $file): self
     {
         $this->files->removeElement($file);
 
