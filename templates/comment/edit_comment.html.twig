@@ -1,5 +1,39 @@
+{#comment/edit_comment.html.twig#}
+
 {% extends 'base.html.twig' %}
+{% import 'marco.html.twig' as macros %}
+{% block title %}Edit Comment{% endblock %}
 
 {% block content %}
-    {{ form(comment_form) }}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-{{ label }} mt-4 alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <!-- Comments Form -->
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="card my-4">
+            <h5 class="card-header">Edit Comment:</h5>
+            <div class="card-body">
+                {#    {{ form(comment_form) }}#}
+                {{ form_start(comment_form) }}
+                <div class="my-custom-class-for-errors">
+                    {{ form_errors(comment_form) }}
+                </div>
+
+                {{ form_row(comment_form.author) }}
+                {{ form_row(comment_form.email) }}
+                {{ form_row(comment_form.message) }}
+                {#            <button type="submit">提交</button>#}
+                {{ form_end(comment_form) }}
+            </div>
+        </div>
+    {% else %}
+        {{ 'login_for_edit_comment'|trans({'%login_path%': path('app_login')})|raw }}
+    {% endif %}
+
 {% endblock %}

@@ -84,6 +84,14 @@ class CommentController extends BaseController
     {
         $commentForm = $this->createForm(CommentType::class, $comment);
 
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid())
+        {
+            $data = $commentForm->getData();
+
+            dd($data);
+        }
         return $this->render('comment/edit_comment.html.twig', [
             'comment_form' => $commentForm->createView()
         ]);
