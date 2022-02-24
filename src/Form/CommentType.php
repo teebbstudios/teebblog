@@ -69,7 +69,12 @@ class CommentType extends AbstractType
                             'image/*'
                         ])
                     ],
-                    'file_class' => SimpleFile::class
+                    'file_class' => SimpleFile::class,
+                    'base_path' => '/teebb_uploader/',
+                    'show_image' => true,
+                    'image_attr' => [
+                        'class' => 'my-3 w-25'
+                    ]
                 ],
                 'allow_add' => true,
                 'attr' => [
