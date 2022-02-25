@@ -3,7 +3,6 @@ twig:
     form_themes:
         - 'bootstrap_4_layout.html.twig'
         - 'form/_comment_files_widget.html.twig'
-        - '@TeebbUploader/form/_uploader_file.html.twig'
 when@test:
     twig:
         strict_variables: true
