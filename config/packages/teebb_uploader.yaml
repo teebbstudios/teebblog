@@ -1,2 +1,7 @@
 teebb_uploader:
     upload_dir: '%kernel.project_dir%/public/teebb_uploader'
+    namer: 'teebb.uploader.namer.php_namer'
+#        service: 'teebb.uploader.namer.hash_namer'
+#        options:
+#            length: 10
+#    storage: serviceID
