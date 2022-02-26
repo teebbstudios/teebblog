@@ -1,7 +1,29 @@
 teebb_uploader:
-    upload_dir: '%kernel.project_dir%/public/teebb_uploader'
-    namer: 'teebb.uploader.namer.php_namer'
+#    upload_dir: '%kernel.project_dir%/public/teebb_uploader'
+#    namer: 'teebb.uploader.namer.php_namer'
 #        service: 'teebb.uploader.namer.hash_namer'
 #        options:
 #            length: 10
 #    storage: serviceID
+    handlers:
+        name1:
+            entity: SimpleFile
+            upload_dir: 'dir'
+            uri_prefix: ''
+            namer:
+                service: ''
+                options: []
+            storage:
+                type: 'file_system' # fly_system
+                service: ''
+
+        name2:
+            entity: SimpleFile2
+            upload_dir: 'dir'
+            uri_prefix: ''
+            namer:
+                service: ''
+                options: []
+            storage:
+                type: 'file_system' # fly_system
+                service: ''
