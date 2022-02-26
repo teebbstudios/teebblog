@@ -90,7 +90,10 @@ class CommentController extends BaseController
         {
             $data = $commentForm->getData();
 
-            dd($data);
+            $em->persist($data);
+            $em->flush();
+
+            $this->addFlash('success', '当前评论内容已经修改成功！');
         }
         return $this->render('comment/edit_comment.html.twig', [
             'comment_form' => $commentForm->createView()

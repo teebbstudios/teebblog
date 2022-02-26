@@ -16,7 +16,7 @@ class SimpleFileSubscriber implements EventSubscriberInterface
         /**@var SimpleFile $simpleFile * */
         $simpleFile = $event->getFileObject();
 
-//        $simpleFile->setPath('teebb_uploader' . \DIRECTORY_SEPARATOR. $simpleFile->getFileName() );
+        $simpleFile->setPath('teebb_uploader' . \DIRECTORY_SEPARATOR. $simpleFile->getFileName() );
     }
 
     public static function getSubscribedEvents()
