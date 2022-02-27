@@ -13,9 +13,12 @@ teebb_uploader:
 
         name2:
             entity: 'App\Entity\SimpleFile'
-            upload_dir: '%kernel.project_dir%/public/teebb_uploader2'
+            upload_dir: 'temp'
             uri_prefix: 'temp'
             namer:
                 service: 'teebb.uploader.namer.hash_namer'
                 options:
                     length: 10
+            storage:
+                type: 'fly_system'
+                service: 'default_filesystem'
