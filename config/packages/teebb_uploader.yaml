@@ -6,24 +6,16 @@ teebb_uploader:
 #            length: 10
 #    storage: serviceID
     handlers:
-        name1:
-            entity: SimpleFile
-            upload_dir: 'dir'
-            uri_prefix: ''
-            namer:
-                service: ''
-                options: []
-            storage:
-                type: 'file_system' # fly_system
-                service: ''
+        simple_file_handler:
+            entity: 'App\Entity\SimpleFile'
+            upload_dir: '%kernel.project_dir%/public/teebb_uploader'
+            uri_prefix: 'teebb_uploader'
 
         name2:
-            entity: SimpleFile2
-            upload_dir: 'dir'
-            uri_prefix: ''
+            entity: 'App\Entity\SimpleFile'
+            upload_dir: 'temp'
+            uri_prefix: 'temp'
             namer:
-                service: ''
-                options: []
-            storage:
-                type: 'file_system' # fly_system
-                service: ''
+                service: 'teebb.uploader.namer.hash_namer'
+                options:
+                    length: 10
