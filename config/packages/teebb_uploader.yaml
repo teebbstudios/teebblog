@@ -9,16 +9,16 @@ teebb_uploader:
         simple_file_handler:
             entity: 'App\Entity\SimpleFile'
             upload_dir: '%kernel.project_dir%/public/teebb_uploader'
-            uri_prefix: 'teebb_uploader'
+            package_name: 'teebb_uploader'
 
-        name2:
-            entity: 'App\Entity\SimpleFile'
-            upload_dir: 'temp'
-            uri_prefix: 'temp'
-            namer:
-                service: 'teebb.uploader.namer.hash_namer'
-                options:
-                    length: 10
-            storage:
-                type: 'fly_system'
-                service: 'default_filesystem'
+#        name2:
+#            entity: 'App\Entity\SimpleFile'
+#            upload_dir: 'temp'
+#            package_name: 'temp'
+#            namer:
+#                service: 'teebb.uploader.namer.hash_namer'
+#                options:
+#                    length: 10
+#            storage:
+#                type: 'fly_system'
+#                service: 'default_filesystem'

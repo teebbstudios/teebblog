@@ -1,2 +1,0 @@
-_teebb_routes:
-    resource: "@TeebbUploaderBundle/Resources/config/routing/route.xml"
